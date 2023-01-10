@@ -5,25 +5,28 @@ import Button from "@mui/material/Button";
 import SearchIcon from "@mui/icons-material/Search";
 import SearchTextField from "./components/SearchTextField";
 
+
 function App() {
   const onValidate = (value) => {
-    const gg = {};
+    const errors = {};
     if (value.searchInput === undefined) {
-      gg.searchInput = 'Введите значние'
+      errors.searchInput = 'Введите значние'
     }
-    return gg;
+    return errors;
 
   };
 
-  const onSubmit = (formValue) => {
-    console.log(formValue);
+  const onSubmit = (formValue,form) => {
+    console.log(formValue)
+    form.reset()
   };
 
   return (
     <Form
       onSubmit={onSubmit}
       validate={onValidate}
-      render={({ handleSubmit }) => {
+      render={(formProps) => {
+        const { handleSubmit, valid} = formProps
         return (
           <Paper
             component="form"
@@ -42,7 +45,10 @@ function App() {
               />
               <SearchIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
             </Box>
-            <Button type="submit" variant="contained">
+            <Button
+              disabled={!valid}
+              type="submit"
+              variant="contained">
               Find
             </Button>
           </Paper>
