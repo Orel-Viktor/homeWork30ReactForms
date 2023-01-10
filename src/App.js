@@ -25,6 +25,9 @@ function App() {
     <Form
       onSubmit={onSubmit}
       validate={onValidate}
+      initialValues ={{
+        searchInput : "test"
+      }}
       render={(formProps) => {
         const { handleSubmit, valid} = formProps
         return (
